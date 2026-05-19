@@ -8,8 +8,7 @@ def registrar_usuario():
         contraseña = request.form.get('contraseña')
         confirmar = request.form.get('confirmar')
         correo = request.form.get('correo')
-        
-        # Validaciones
+
         if not usuario or not contraseña or not correo:
             return render_template('registro.html', error='Todos los campos son obligatorios')
         
@@ -18,13 +17,11 @@ def registrar_usuario():
         
         if len(contraseña) < 6:
             return render_template('registro.html', error='La contraseña debe tener al menos 6 caracteres')
-        
-        # Verificar si usuario ya existe
+
         usuario_existente = Usuario.query.filter_by(usuario=usuario).first()
         if usuario_existente:
             return render_template('registro.html', error='El usuario ya existe')
-        
-        # Crear nuevo usuario
+
         nuevo_usuario = Usuario(usuario=usuario, contraseña=contraseña, correo=correo)
         db.session.add(nuevo_usuario)
         db.session.commit()
