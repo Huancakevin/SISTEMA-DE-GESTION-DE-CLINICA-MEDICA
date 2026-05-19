@@ -15,11 +15,9 @@ app.secret_key = 'clave_secreta_para_flash_messages'
 
 db.init_app(app)
 
-# Crear las tablas antes de la primera petición
 with app.app_context():
     try:
         db.create_all()
-        # Crear usuario admin por defecto si no existe
         usuario_admin = Usuario.query.filter_by(usuario='admin').first()
         if not usuario_admin:
             admin = Usuario(usuario='admin', contraseña='123456', correo='admin@clinica.com')
@@ -29,7 +27,6 @@ with app.app_context():
     except Exception as e:
         print(f"Nota: {e}")
 
-# ================= RUTAS DE AUTENTICACIÓN =================
 @app.route('/login', methods=['GET', 'POST'])
 def ruta_login():
     return login()
@@ -42,19 +39,16 @@ def ruta_logout():
 def ruta_registro():
     return registrar_usuario()
 
-# ================= RUTAS PRINCIPALES =================
 @app.route('/')
 @requerir_login
 def index():
     return render_template('base.html')
 
-# ================= RUTA DE REPORTE =================
 @app.route('/reporte')
 @requerir_login
 def ruta_reporte():
     return generar_reporte()
 
-# ================= RUTAS: PACIENTES =================
 @app.route('/pacientes', methods=['GET', 'POST'])
 @requerir_login
 def pacientes():
@@ -65,7 +59,6 @@ def pacientes():
 def eliminar_paciente(id):
     return eliminar_paciente_route(id)
 
-# ================= RUTAS: MÉDICOS =================
 @app.route('/medicos', methods=['GET', 'POST'])
 @requerir_login
 def medicos():
@@ -76,7 +69,6 @@ def medicos():
 def eliminar_medico(id):
     return eliminar_medico_route(id)
 
-# ================= RUTAS: CONSULTAS =================
 @app.route('/consultas', methods=['GET', 'POST'])
 @requerir_login
 def consultas():
