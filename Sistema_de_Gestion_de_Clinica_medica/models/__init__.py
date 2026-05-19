@@ -9,8 +9,6 @@ class Medico(db.Model):
     especialidad = db.Column(db.String(100), nullable=False)
     telefono = db.Column(db.String(20), nullable=False)
     correo = db.Column(db.String(100), nullable=False)
-    
-    # Relación: Un médico puede tener muchas consultas
     consultas = db.relationship('Consulta', backref='medico', lazy=True, cascade="all, delete-orphan")
 
 class Paciente(db.Model):
@@ -20,8 +18,6 @@ class Paciente(db.Model):
     edad = db.Column(db.Integer, nullable=False)
     direccion = db.Column(db.String(200), nullable=False)
     telefono = db.Column(db.String(20), nullable=False)
-    
-    # Relación: Un paciente puede tener muchas consultas
     consultas = db.relationship('Consulta', backref='paciente', lazy=True, cascade="all, delete-orphan")
 
 class Consulta(db.Model):
@@ -30,8 +26,7 @@ class Consulta(db.Model):
     fecha = db.Column(db.Date, nullable=False)
     diagnostico = db.Column(db.Text, nullable=False)
     tratamiento = db.Column(db.Text, nullable=False)
-    
-    # Claves foráneas
+
     id_medico = db.Column(db.Integer, db.ForeignKey('medicos.id_medico'), nullable=False)
     id_paciente = db.Column(db.Integer, db.ForeignKey('pacientes.id_paciente'), nullable=False)
 
