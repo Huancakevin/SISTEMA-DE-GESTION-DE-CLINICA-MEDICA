@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Gestión de Clínica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1f4f8b 0%, #163d6d 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .login-container h1 {
+            color: #1f4f8b;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 2rem;
+        }
+        
+        .login-container p {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #2d3a4b;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd3df;
+            border-radius: 8px;
+            background: #f9fbff;
+            font-size: 0.95rem;
+            color: #2d3a4b;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #1f4f8b;
+            box-shadow: 0 0 5px rgba(31, 79, 139, 0.2);
+        }
+        
+        .form-group button {
+            width: 100%;
+            padding: 12px;
+            background: #1f4f8b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .form-group button:hover {
+            background: #163d6d;
+        }
+        
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid #fcc;
+        }
+        
+        .credentials-info {
+            background: #f0f5ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 4px solid #1f4f8b;
+            font-size: 0.85rem;
+            color: #2d3a4b;
+        }
+        
+        .credentials-info strong {
+            color: #1f4f8b;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Sistema de Clínica</h1>
+        <p>Gestión de Médicos, Pacientes y Consultas</p>
+        
+        {% if error %}
+            <div class="error-message">{{ error }}</div>
+        {% endif %}
+        
+        <form method="POST" action="/login">
+            <div class="form-group">
+                <label for="usuario">Usuario:</label>
+                <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario" required autofocus>
+            </div>
+            
+            <div class="form-group">
+                <label for="contraseña">Contraseña:</label>
+                <input type="password" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña" required>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit">Ingresar al Sistema</button>
+            </div>
+        </form>
+        
+        <div class="credentials-info">
+            <strong>Credenciales de acceso:</strong><br>
+            Usuario: <strong>admin</strong><br>
+            Contraseña: <strong>123456</strong>
+        </div>
+        
+        <div class="link-container" style="text-align: center; margin-top: 20px; font-size: 0.9rem;">
+            ¿No tienes cuenta? <a href="/registro" style="color: #1f4f8b; text-decoration: none; font-weight: 600;">Regístrate aquí</a>
+        </div>
+    </div>
+</body>
+</html>

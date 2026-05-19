@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Clínica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fc;
+            color: #2d3a4b;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background: #1f4f8b;
+            color: #fff;
+            padding: 14px 20px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 960px;
+            margin: 24px auto;
+            padding: 0 18px 24px;
+        }
+        .card {
+            background: #ffffff;
+            border: 1px solid #d6dde8;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(45, 58, 75, 0.08);
+            padding: 22px;
+            margin-bottom: 24px;
+        }
+        h1, h2, h3 {
+            margin-top: 0;
+        }
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+        }
+        h2 {
+            color: #1f4f8b;
+            margin-bottom: 18px;
+        }
+        form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            align-items: end;
+            margin-bottom: 20px;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid #cbd3df;
+            border-radius: 8px;
+            background: #f9fbff;
+            font-size: 0.95rem;
+            color: #2d3a4b;
+            box-sizing: border-box;
+        }
+        button, .button-link {
+            background: #1f4f8b;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 18px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            font-weight: 600;
+        }
+        button:hover, .button-link:hover {
+            background: #163d6d;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table th, table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e4e9f2;
+            text-align: left;
+        }
+        table th {
+            background: #f2f6fb;
+            color: #2d3a4b;
+            font-weight: 700;
+        }
+        table tr:hover {
+            background: #f5f8ff;
+        }
+        a.button-link {
+            display: inline-block;
+            text-decoration: none;
+        }
+        .actions a {
+            color: #1f4f8b;
+            font-weight: 600;
+        }
+        .actions a:hover {
+            text-decoration: underline;
+        }
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+        .filter-row label {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Inicio</a> |
+        <a href="/medicos">Médicos</a> |
+        <a href="/pacientes">Pacientes</a> |
+        <a href="/consultas">Consultas</a> |
+        <a href="/reporte">Reporte</a>
+        <span style="margin-left: auto; display: flex; align-items: center; gap: 16px;">
+            {% if session.get('usuario') %}
+                <span>Bienvenido: <strong>{{ session.get('usuario') }}</strong></span>
+                <a href="/logout" style="background: #163d6d; padding: 8px 14px; border-radius: 6px; text-decoration: none;">Cerrar Sesión</a>
+            {% endif %}
+        </span>
+    </nav>
+    <div class="container">
+        {% block content %}
+        <div class="card">
+            <h1>Bienvenido al Sistema de Gestión de Clínica Médica</h1>
+            <p>Usa el menú para administrar médicos, pacientes y consultas.</p>
+        </div>
+        {% endblock %}
+    </div>
+</body>
+</html>

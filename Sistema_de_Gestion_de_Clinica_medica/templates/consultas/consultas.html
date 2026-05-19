@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <h2>Gestión de Consultas</h2>
+    <form method="GET" action="/consultas" class="filter-row">
+        <label>Filtrar por fecha:</label>
+        <input type="date" name="filtro_fecha">
+        <button type="submit">Filtrar</button>
+        <a href="/consultas" class="button-link">Limpiar Filtro</a>
+    </form>
+
+    <form method="POST" action="/consultas">
+        <input type="date" name="fecha" required>
+        <input type="text" name="diagnostico" placeholder="Diagnóstico" required>
+        <input type="text" name="tratamiento" placeholder="Tratamiento" required>
+        
+        <select name="id_medico" required>
+            <option value="">Seleccione Médico</option>
+            {% for medico in medicos %}
+                <option value="{{ medico.id_medico }}">{{ medico.nombre }} - {{ medico.especialidad }}</option>
+            {% endfor %}
+        </select>
+        
+        <select name="id_paciente" required>
+            <option value="">Seleccione Paciente</option>
+            {% for paciente in pacientes %}
+                <option value="{{ paciente.id_paciente }}">{{ paciente.nombre }}</option>
+            {% endfor %}
+        </select>
+        
+        <button type="submit">Registrar Consulta</button>
+    </form>
+</div>
+
+<div class="card">
+    <h3>Listado de Consultas</h3>
+    <table>
+        <tr>
+            <th>ID</th><th>Fecha</th><th>Diagnóstico</th><th>Tratamiento</th>
+            <th>Médico</th><th>Paciente</th><th>Acciones</th>
+        </tr>
+        {% for consulta in consultas %}
+        <tr>
+            <td>{{ consulta.id_consulta }}</td>
+            <td>{{ consulta.fecha }}</td>
+            <td>{{ consulta.diagnostico }}</td>
+            <td>{{ consulta.tratamiento }}</td>
+            <td>{{ consulta.medico.nombre }}</td>
+            <td>{{ consulta.paciente.nombre }}</td>
+            <td class="actions"><a href="/eliminar_consulta/{{ consulta.id_consulta }}">Eliminar</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

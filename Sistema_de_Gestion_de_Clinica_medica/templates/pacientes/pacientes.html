@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <h2>Gestión de Pacientes</h2>
+    <form method="POST" action="/pacientes">
+        <input type="text" name="nombre" placeholder="Nombre" required>
+        <input type="number" name="edad" placeholder="Edad" required>
+        <input type="text" name="direccion" placeholder="Dirección" required>
+        <input type="text" name="telefono" placeholder="Teléfono" required>
+        <button type="submit">Registrar Paciente</button>
+    </form>
+</div>
+
+<div class="card">
+    <h3>Listado de Pacientes</h3>
+    <table>
+        <tr>
+            <th>ID</th><th>Nombre</th><th>Edad</th><th>Dirección</th><th>Teléfono</th><th>Acciones</th>
+        </tr>
+        {% for paciente in pacientes %}
+        <tr>
+            <td>{{ paciente.id_paciente }}</td>
+            <td>{{ paciente.nombre }}</td>
+            <td>{{ paciente.edad }}</td>
+            <td>{{ paciente.direccion }}</td>
+            <td>{{ paciente.telefono }}</td>
+            <td class="actions"><a href="/eliminar_paciente/{{ paciente.id_paciente }}">Eliminar</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
