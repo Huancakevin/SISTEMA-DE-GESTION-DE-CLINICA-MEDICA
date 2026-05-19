@@ -6,8 +6,7 @@ def login():
     if request.method == 'POST':
         usuario = request.form.get('usuario')
         contraseña = request.form.get('contraseña')
-        
-        # Validar credenciales contra la base de datos
+
         usuario_obj = Usuario.query.filter_by(usuario=usuario, contraseña=contraseña).first()
         
         if usuario_obj:
@@ -15,8 +14,7 @@ def login():
             return redirect(url_for('index'))
         else:
             return render_template('login.html', error='Usuario o contraseña incorrectos')
-    
-    # Si ya está logueado, redirigir al inicio
+
     if 'usuario' in session:
         return redirect(url_for('index'))
     
